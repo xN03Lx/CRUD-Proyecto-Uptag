@@ -1,0 +1,46 @@
+body{
+	font-family:  'Roboto', Arial, Sans-serif;
+	background-image: url('../imagen/fondo.jpg');
+	background-size: cover;
+}
+fieldset{
+	border-radius: 10px;
+}
+.field{
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 10%;
+	background-color: rgba(0, 0, 0, .7);
+	border-width: 10px;
+	box-shadow: 5px 10px 7px rgba(0,0,0,.5);
+}
+.field fieldset h2{
+	color: #ffffff;
+	text-align: center;
+}
+.field fieldset .i_estudiante h2{
+	text-align: left;
+}
+.field fieldset .i_docente h2{
+	text-align: right;
+}
+.i_estudiante{
+  	position: absolute;
+}
+.i_docente{
+  	position: absolute;
+  	margin-left: 27.8%;
+  	text-align: right;
+}
+.tamano img{
+    width: 50%;
+    height: 50%;
+    box-shadow: 5px 10px 7px rgba(0,0,0,.5);
+}
+.tamano img:hover{
+background: #4fb560;
+color: #fff;
+-webkit-transition:all 0.8s cubic-bezier(.25, .8, .25, 1);
+-moz-transition: all 0.8s cubic-bezier(.25, .8, .25, 1);
+transition: all 0.8s cubic-bezier(.25, .8, .25, 1);
+}
