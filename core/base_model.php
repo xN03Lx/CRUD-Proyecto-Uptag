@@ -27,7 +27,7 @@ class BaseModel
         return "";
     }
 
-    public function crear($valores){
+    public function crear(){
         try {
             
             $sql = "INSERT INTO ";
@@ -37,16 +37,16 @@ class BaseModel
             $values = array();
             $inconigtos = array();
 
-            foreach ($valores as $clave => $valor){
+            foreach ($this->atributos as $clave => $valor){
                 $campos[] = $clave;
+
                 $values[] = $valor;
-                $inconigtos[] = "?";
             }
 
             $sql .= " (".join(",",$campos).") VALUES";
-            $sql .= " ('".join("','",$inconigtos)."')";
+            $sql .= " ('".join("','",$values)."')";
 
-            $this->pdo->prepare($sql)->execute($values);
+            $this->pdo->prepare($sql)->execute($this->atributos);
         
         } catch (Exception $e) {
 			die($e->getMessage());
@@ -82,7 +82,7 @@ class BaseModel
 
     }
 
-    public function actualizar(int $id, array $valores){
+    public function actualizar(int $id){
         try {
             
             $sql = "UPDATE";
@@ -90,13 +90,13 @@ class BaseModel
             $sql .= " SET ";
 
 
-            foreach ($valores as $clave => $valor){
+            foreach ($this->atributos as $clave => $valor){
 
                 $sql .= $clave." = ";
-                $sql .= $valor.","
+                $sql .= $valor.",";
             }
-            $sql = rtrim($sql, ",")
-            $sql .= " WHERE id= ".$id
+            $sql = rtrim($sql, ",");
+            $sql .= " WHERE id= ".$id;
 
             $this->pdo->prepare($sql)->execute();
         
