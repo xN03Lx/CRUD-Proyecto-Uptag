@@ -1,4 +1,7 @@
+<?php 
+	if (isset($_SESSION["data"])){$estudiante = $_SESSION["data"];}
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,40 +16,38 @@
 			<div class="fields">
 				<fieldset>
 					<div class="encabezado">
-
-			            <h1 class="centrado">Registro Estudiantil</h1>
-			            <div class="tamano">
-				          <a title="docente"><img src="public/imagen/estudiante.png" alt="estudiante"/></a>
+					<?php  echo isset($estudiante) ?  "<h2 class='centrado'> Editar Estudiante $estudiante->primer_nombre</h1" :  "<h1 class='centrado'>Registro Estudiantil</h1>"; ?>
+			            <div class="tamano" style="margin: auto; " >
+				          <img src="public/imagen/estudiante.png" alt="estudiante" width="150px" style="margin: auto; display: block;" >
 				        </div>
-			            <p class="centrado">Bienvenid@ al Sistema de Registro UPTFAG (PNFI)</p>
 		            </div>
-		        <form class="form" id="form" method="POST" action="?c=Estudiante&a=Guardar">
+		        <form class="form" id="form" method="POST" action="">
 		            <input type="hidden" name="id" value="<?php  ?>" />
 
 		            <div class="registro">
 			          	<div class="mover">
 		
-			          		<input type="text" placeholder="Primer Nombre" name="nombre1" id="nombre1" class="input">
-							<input type="text" placeholder="Segundo Nombre" name="nombre2" id="nombre2" class="input">
+			          		<input type="text" placeholder="Primer Nombre" name="nombre1" id="nombre1" class="input" value="<?php echo isset($estudiante) ? $estudiante->primer_nombre : ''; ?>">
+							<input type="text" placeholder="Segundo Nombre" name="nombre2" id="nombre2" class="input" value="<?php echo isset($estudiante) ? $estudiante->segundo_nombre : ''; ?>">
 			          	</div>
 			          	<div class="mover">
-			          		<input type="text" placeholder="Primer Apellido" name="apellido1" id="apellido1" class="input">
-							<input type="text" placeholder="Segundo Apellido" name="apellido2" id="apellido2" class="input">
+			          		<input type="text" placeholder="Primer Apellido" name="apellido1" id="apellido1" class="input" value="<?php echo isset($estudiante) ? $estudiante->primer_apellido : ''; ?>">
+							<input type="text" placeholder="Segundo Apellido" name="apellido2" id="apellido2" class="input" value="<?php echo isset($estudiante) ? $estudiante->segundo_apellido : ''; ?>">
 			          	</div>
 			          	<div class="mover">
-			          		<input type="text" placeholder="Cedula" name="cedula" id="cedula" class="input">
-							<input type="text" placeholder="Fecha de Nac." name="fecha_nac" id="fecha_nac" class="input">
+			          		<input type="text" placeholder="Cedula" name="cedula" id="cedula" class="input" value="<?php echo isset($estudiante) ? $estudiante->cedula: ''; ?>">
+							<input type="text" placeholder="Fecha de Nac." name="fecha_nac" id="fecha_nac" class="input" value="<?php echo isset($estudiante) ? $estudiante->fecha_nacimiento : ''; ?>">
 			          	</div>
 		            </div>
 		            <div class="registro2">
 		            	<div class="mover">
-							<input type="email" placeholder="Correo Electronico" name="email" id="email" class="input largo">
+							<input type="email" placeholder="Correo Electronico" name="email" id="email" class="input largo" value="<?php echo isset($estudiante) ? $estudiante->correo : ''; ?>">
 		          		</div>
 		          		<div class="mover">
-							<input type="text" placeholder="Dirección" name="direccion" id="direccion" class="input largo">
+							<input type="text" placeholder="Dirección" name="direccion" id="direccion" class="input largo" value="<?php echo isset($estudiante) ? $estudiante->direccion : ''; ?>">
 			          	</div>
 			          	<div class="mover">
-							<input type="text" placeholder="Observación" name="observacion" id="observacion" class="input largo">
+							<input type="text" placeholder="Observación" name="observacion" id="observacion" class="input largo" value="<?php echo isset($estudiante) ? $estudiante->observaciones : ''; ?>">
 			          	</div>
 		            </div>
 		            <br>
