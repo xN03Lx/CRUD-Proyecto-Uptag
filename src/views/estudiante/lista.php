@@ -23,17 +23,18 @@
 					<th>Acciones</th>
 				</thead>
 				<tbody class="tbody" id="tbody">
-					
-					<?php foreach($_SESSION["data"] as $value){
+					<?php foreach($_SESSION["data"] as $value): ?>
 
-  					 echo "<tr><td>".$value->primer_nombre." ".$value->segundo_nombre."</td>";
-  					 echo "<td>".$value->primer_apellido." ".$value->segundo_apellido."</td>";
-  					 echo "<td>".$value->cedula."</td>";
-  					 echo "<td> <a href='#".$value->id."' class='btn'>Editar</a> <a href='#".$value->id."' class='btn danger'>Eliminar</a></td></tr>";
-					} ?> 
-
-					
-
+  					<tr>
+	  					 <td><?php echo $value->primer_nombre." ".$value->segundo_nombre; ?></td>
+	  					 <td><?php echo $value->primer_apellido." ".$value->segundo_apellido; ?></td>
+	  					 <td><?php echo $value->cedula; ?></td>
+	  					 <td>
+	  					 	<a href='?c=Estudiante&a=Editar&id_estudiante=<?php echo  $value->id?>' class='btn'>Editar</a>
+	  					    <a class="btn danger" onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Estudiante&a=Eliminar&id_estudiante=<?php echo $value->id; ?>">Eliminar</a>
+	   					</td>
+	   				</tr>
+				<?php endforeach; ?> 
 				</tbody>
 		
 			</table>
