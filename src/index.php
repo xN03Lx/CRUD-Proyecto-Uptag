@@ -21,40 +21,30 @@ else{
 
 			$controller->handleRequest();
 		}
-		
 		else{
 			require_once('controllers/estudiante_controller.php');
 		 	$ce = new EstudianteController();
 			return $ce->index(); 
 		}
+		
 	}
+	elseif ($controller == "docente"){
+		if (isset($_GET['a'])){
 
+			require_once('controllers/docente_controller.php');
 
-	// $controller = strtolower($_GET['c']);
-  
+			$controller = new DocenteController();
 
-	// if($controller == "estudiante"){
-
-	// 	if (isset($_GET['a'])) {
-	// 		$accion = strtolower($_GET['a']);
-	// 		if($accion == "guardar"){
-	// 			require_once('controllers/estudiante_controller.php');
-	// 			$ce = new EstudianteController();
-	// 			call_user_func( array("Estudiante", "Guardar" ) );
-
-	// 			return $ce->abc();
-	// 		}
-
-	// 	}
-
-	// 	else{
-	// 		require_once('controllers/estudiante_controller.php');
-	// 		$ce = new EstudianteController();
-	// 		return $ce->index(); 
-	// 	}
-	// }
-
+			$controller->handleRequest();
+		}
+		else{
+			require_once('controllers/docente_controller.php');
+		 	$ce = new DocenteController();
+			return $ce->index(); 
+		}
+	}
 }
+
 
 
 
