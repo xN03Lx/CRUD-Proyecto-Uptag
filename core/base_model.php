@@ -15,7 +15,7 @@ class BaseModel
 
         try
 		{
-			$this->pdo = Database::StartUp();     
+			$this->pdo = Database::StartDb();     
 		}
 		catch(Exception $e)
 		{
