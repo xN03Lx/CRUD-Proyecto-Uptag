@@ -67,12 +67,12 @@ class BaseModel
 			die($e->getMessage());
 		}
 	}
-
-    public function eliminar(int $id){
+    public function eliminar($id){
         try{
-            $stm = $this->pdo->prepare("DELETE FROM :table WHERE id = :id");
-            $stm->bindParam(":table", $this->getTable(), PDO::PARAM_STR);
-            $stm->bindParam(":id", $id, PDO::PARAM_INT);
+            $table = $this->getTable();
+            $sql = "DELETE FROM ".$this->getTable();
+            $sql .= " WHERE id = ".$id;
+            $stm = $this->pdo->prepare($sql);
             return $stm->execute();
 
         }
@@ -82,38 +82,41 @@ class BaseModel
 
     }
 
-    public function actualizar(int $id){
-        try {
-            
-            $sql = "UPDATE";
+    public function actualizar($id){
+        try {        
+
+            $values = array();
+            $sql = "UPDATE ";
             $sql .= $this->getTable();
             $sql .= " SET ";
-
-
+            
             foreach ($this->atributos as $clave => $valor){
-
+                 $values[] = $valor;
                 $sql .= $clave." = ";
-                $sql .= $valor.",";
+                $sql .= "?, ";
             }
-            $sql = rtrim($sql, ",");
-            $sql .= " WHERE id= ".$id;
 
-            $this->pdo->prepare($sql)->execute();
-        
+            $values[] = $id;
+            $sql = substr($sql, 0, -2);
+            $sql .= " WHERE id = ? ";
+
+            $this->pdo->prepare($sql)->execute($values);
+
         } catch (Exception $e) {
             die($e->getMessage());
         }
 
     }
 
-    public function obtener(int $id){
+    public function obtener($id){
+        $table = $this->getTable();
         try{
-            $stm = $this->pdo->prepare("SELECT * FROM :table WHERE id = :id");
-            $stm->bindParam(":table", $this->getTable(), PDO::PARAM_STR);
-            $stm->bindParam(":id", $id, PDO::PARAM_INT);
-            $stm->execute();
-            return $stm->fetch(PDO::FETCH_OBJ);
-
+            $sql = "SELECT * FROM ";
+            $sql .= $table;
+            $sql .= " WHERE id = ?";
+            $query = $this->pdo->prepare($sql);
+            $query->execute(array($id));
+            return $query->fetch(PDO::FETCH_OBJ);
         }
         catch(Exception $e){
             die($e->getMessage());
