@@ -71,13 +71,12 @@ class EstudianteController extends BaseController {
         }
         catch(Exception $e)
         {
-            $this->showError("Application error", $e->getMessage());
+            $e->getMessage();
         }
     }   
 
     public function Guardar(){
 
-        $errors = array();
 
         if (isset($_POST['form-submitted'])) 
             {
@@ -102,7 +101,7 @@ class EstudianteController extends BaseController {
                 }
                 catch(ValidationException $e)
                 {
-                    $errors = $e->getErrors();
+                    $e->getMessage();
                 }
             }
     
@@ -135,7 +134,7 @@ class EstudianteController extends BaseController {
                 }
                 catch(ValidationException $e)
                 {
-                    $errors = $e->getErrors();
+                     $e->getMessage();
                 }
         }
 
@@ -154,11 +153,6 @@ class EstudianteController extends BaseController {
         }
        
 
-
-        else if (!$id)
-        {
-            throw new Exception('Internal error');
-        }
     }
 
      public function showError($title, $message) 
