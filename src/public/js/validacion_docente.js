@@ -61,11 +61,11 @@ let valCel = (e, cedula, red) => {
 }
 
 let valFechas = (e, fecha, red, mensaje) => {
-	let fechaRegex = /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$/;
+	let fechaRegex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
 
 	if(fechaRegex.test(fecha) == false){
 		error.style.display = 'block';
-		error.innerHTML += `<li>Campo ${mensaje} debe tener un formato valido: dd/mm/aaaa  </li>`;
+		error.innerHTML += `<li>Campo ${mensaje} debe tener un formato valido: aaaa-mm-dd  </li>`;
 		red.className = 'input errorInput';
 		e.preventDefault();
 	}
@@ -131,7 +131,6 @@ let valDocente = (e) => {
 	let fecha_nacimiento =document.getElementById('fecha_nac');
 	let email =document.getElementById('email');
 	let direccion =document.getElementById('direccion');
-	let observacion =document.getElementById('observacion');
 	let fecha_ingreso = document.getElementById('fec_ingr_iutag');
 	let materia_imparte = document.getElementById('materia_imparte');
 	let condic_contrac = document.getElementById('condic_contrac');
@@ -187,4 +186,10 @@ var activa = (v) =>{
 	}
 
 }
+
+var val = document.getElementById('select-maestria');
+		if (val.value == 1) {
+			maestria.style.display = 'inline-block';
+}
+
  
