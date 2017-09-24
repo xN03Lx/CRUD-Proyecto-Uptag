@@ -6,9 +6,7 @@ require_once("models/estudiante.php");
 
 
 class EstudianteController extends BaseController {
-    /*public function __constructor(){  
-        $this->set_dir_views("../views/estudiante");
-    }*/
+
     private $models;
 
     public function __CONSTRUCT(){
@@ -34,12 +32,42 @@ class EstudianteController extends BaseController {
 
         try {
             if (!$op || $op == 'Guardar'){
-                    $this->render("estudiantes.php");
+                    $estudiante = null;
+                    $this->render("estudiantes.php", $estudiante);
                     $this->Guardar();
+
             }
-             else {
-                $this->showError("Page not found", "Page for execution" . $op . " was not found");
+
+            if ($op == 'Editar'){
+                
+                if(isset($_REQUEST['id_estudiante'])){
+                    $id = $_REQUEST['id_estudiante'];
+                    $estudiante = $model->obtener($id);
+
+                    if (isset($estudiante)){
+                        $this->render("estudiantes.php", $estudiante);
+                        $this->Actualizar(); 
+                    }
+                    else {
+                        echo "No Found"; //arregla cuando no se encuentre la id
+                    }
+
+
+                }
+
             }
+             if ($op == 'Eliminar'){
+                
+                if(isset($_REQUEST['id_estudiante'])){
+                    $id = $_REQUEST['id_estudiante'];
+                    $estudiantes = $model->obtener($id);
+                
+                    $this->Eliminar();
+
+                }
+
+            }
+
         }
         catch(Exception $e)
         {
@@ -80,24 +108,63 @@ class EstudianteController extends BaseController {
     
     }  
 
+    public function Actualizar(){
+
+        $errors = array();
+
+        if (isset($_POST['form-submitted'])) {
+            $model = new Estudiante();
+            $id = (isset($_REQUEST['id_estudiante']))?($_REQUEST['id_estudiante']):(0); //Cambiar 'id' a id_estudiante
+            $model->atributos = [
+            "primer_nombre" => (isset($_REQUEST['nombre1']))?($_REQUEST['nombre1']):(null),
+            "segundo_nombre" => (isset($_REQUEST['nombre2']))?($_REQUEST['nombre2']):(null),
+            "primer_apellido" =>  (isset($_REQUEST['apellido1']))?($_REQUEST['apellido1']):(null),
+            "segundo_apellido" =>  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):(null),
+            "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(""),
+            "fecha_nacimiento" =>  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):(null),
+            "correo" =>  (isset($_REQUEST['email']))?($_REQUEST['email']):(null),
+            "direccion" =>  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):(null),
+            "observaciones" =>  (isset($_REQUEST['observacion']))?($_REQUEST['observacion']):(null),
+            ]; 
+      
+             try 
+                {
+                    $model->actualizar($id);
+                    header('Location: index.php?c=Estudiante');
+                    return;
+                }
+                catch(ValidationException $e)
+                {
+                    $errors = $e->getErrors();
+                }
+        }
+
+    }
+    
+    public function Eliminar()
+    {
+
+        $id = isset($_GET['id_estudiante']) ? $_GET['id_estudiante'] : null;
+        
+        if (isset($id)){
+
+            $model = new Estudiante();
+            $model->eliminar($id);
+            header('Location: index.php?c=Estudiante');
+        }
+       
 
 
+        else if (!$id)
+        {
+            throw new Exception('Internal error');
+        }
+    }
 
+     public function showError($title, $message) 
+    {
+
+        $this->render("error.php");
+    }
 }
 
-
-//         $model->primer_nombre =  (isset($_REQUEST['nombre1']))?($_REQUEST['nombre1']):("");
-//         $model->segundo_nombre =  (isset($_REQUEST['nombre2']))?($_REQUEST['nombre2']):("");
-//         $model->primer_apellido =  (isset($_REQUEST['apellido']))?($_REQUEST['apellido']):("");
-//         $model->segundo_apellido =  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):("");
-//         $model->cedula =  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):("");
-//         $model->fecha_nacimiento =  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):("");
-//         $model->correo =  (isset($_REQUEST['email']))?($_REQUEST['email']):("");
-// //        $model->telefono = $_REQUEST['fijo_est'];
-//         $model->direccion =  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):("");
-//     //    $model->carrera_id = $_REQUEST['fnac_est'];
-//         $model->observaciones=  (isset($_REQUEST['observacion']))?($_REQUEST['observacion']):("");
-
-    
-
-        //header('Location: index.php');
