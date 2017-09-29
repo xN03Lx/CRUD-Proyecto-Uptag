@@ -11,6 +11,7 @@
 		<div class="tabla">
 			<div class="cont">
 			<h2 class="h2">Estudiantes</h2>
+			<a href="index.php" class="btn info" style="margin: 3px 3px;">Pagina de Inicio</a>
 			<a href="?c=Estudiante&a=Guardar" class="btn" style="margin: 3px 3px;">Crear nuevo registro</a>
 
 			<br>

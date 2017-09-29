@@ -33,6 +33,18 @@ let valCampo = (e, nombre, red, mensaje) => {
 	}
 }
 
+let valSelect = (e, value, red, mensaje) =>{
+	if (value < 1) {
+		error.style.display = 'block';
+		error.innerHTML += `<li>el campo ${mensaje}: no esta seleccionada</li>`;
+		red.className = 'select errorSelect'; 
+		e.preventDefault();
+	}
+	else{
+		red.className = 'select'; 
+	}
+}
+
 let valCel = (e, cedula, red) => {
 	//Validar Campos vacios
 	if(cedula == null || cedula.length == 0){

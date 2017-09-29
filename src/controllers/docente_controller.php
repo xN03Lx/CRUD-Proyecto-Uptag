@@ -7,12 +7,6 @@ require_once("models/docente.php");
 
 class DocenteController extends BaseController {
 
-    private $models;
-
-    public function __CONSTRUCT(){
-        $this->models = new Docente();
-    }
-
     public function dirViews(){
         return "views/docente";
     }
@@ -80,7 +74,6 @@ class DocenteController extends BaseController {
 
         if (isset($_POST['form-submitted'])) 
             {
-            $id = (isset($_REQUEST['id']))?($_REQUEST['id']):(""); 
             $model = new Docente();
             $model->atributos = [
                 "primer_nombre" => (isset($_REQUEST['nombre1']))?($_REQUEST['nombre1']):(null),
@@ -89,6 +82,7 @@ class DocenteController extends BaseController {
                 "segundo_apellido" =>  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):(null),
                 "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(""),
                 "fecha_nacimiento" =>  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):(null),
+                "nacionalidad" =>  (isset($_REQUEST['nacionalidad']))?($_REQUEST['nacionalidad']):(null),
                 "correo" =>  (isset($_REQUEST['email']))?($_REQUEST['email']):(null),
                 "direccion" =>  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):(null),
                 "fecha_ingr_uptag" => (isset($_REQUEST['fec_ingr_iutag']))?($_REQUEST['fec_ingr_iutag']):(null),
@@ -125,6 +119,7 @@ class DocenteController extends BaseController {
                 "segundo_apellido" =>  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):(null),
                 "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(""),
                 "fecha_nacimiento" =>  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):(null),
+                "nacionalidad" =>  (isset($_REQUEST['nacionalidad']))?($_REQUEST['nacionalidad']):(null),
                 "correo" =>  (isset($_REQUEST['email']))?($_REQUEST['email']):(null),
                 "direccion" =>  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):(null),
                 "fecha_ingr_uptag" => (isset($_REQUEST['fec_ingr_iutag']))?($_REQUEST['fec_ingr_iutag']):(null),

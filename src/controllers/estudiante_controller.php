@@ -7,12 +7,6 @@ require_once("models/estudiante.php");
 
 class EstudianteController extends BaseController {
 
-    private $models;
-
-    public function __CONSTRUCT(){
-        $this->models = new Estudiante();
-    }
-
     public function dirViews(){
         return "views/estudiante";
     }
@@ -80,18 +74,20 @@ class EstudianteController extends BaseController {
 
         if (isset($_POST['form-submitted'])) 
             {
-            $id = (isset($_REQUEST['id']))?($_REQUEST['id']):(""); //Cambiar 'id' a id_estudiante
             $model = new Estudiante();
             $model->atributos = [
             "primer_nombre" => (isset($_REQUEST['nombre1']))?($_REQUEST['nombre1']):(null),
             "segundo_nombre" => (isset($_REQUEST['nombre2']))?($_REQUEST['nombre2']):(null),
             "primer_apellido" =>  (isset($_REQUEST['apellido1']))?($_REQUEST['apellido1']):(null),
             "segundo_apellido" =>  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):(null),
-            "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(""),
+            "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(null),
+            "nacionalidad" =>  (isset($_REQUEST['nacionalidad']))?($_REQUEST['nacionalidad']):(null),
             "fecha_nacimiento" =>  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):(null),
             "correo" =>  (isset($_REQUEST['email']))?($_REQUEST['email']):(null),
+            "telefono" =>  (isset($_REQUEST['telefono']))?($_REQUEST['telefono']):(null),
             "direccion" =>  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):(null),
             "observaciones" =>  (isset($_REQUEST['observacion']))?($_REQUEST['observacion']):(null),
+            "carrera_id" =>  (isset($_REQUEST['carrera']))?($_REQUEST['carrera']):(null),
             ];           
              try 
                 {
@@ -119,11 +115,15 @@ class EstudianteController extends BaseController {
             "segundo_nombre" => (isset($_REQUEST['nombre2']))?($_REQUEST['nombre2']):(null),
             "primer_apellido" =>  (isset($_REQUEST['apellido1']))?($_REQUEST['apellido1']):(null),
             "segundo_apellido" =>  (isset($_REQUEST['apellido2']))?($_REQUEST['apellido2']):(null),
-            "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(""),
+            "cedula" =>  (isset($_REQUEST['cedula']))?($_REQUEST['cedula']):(null),
+            "nacionalidad" =>  (isset($_REQUEST['nacionalidad']))?($_REQUEST['nacionalidad']):(null),
             "fecha_nacimiento" =>  (isset($_REQUEST['fecha_nac']))?($_REQUEST['fecha_nac']):(null),
             "correo" =>  (isset($_REQUEST['email']))?($_REQUEST['email']):(null),
+            "telefono" =>  (isset($_REQUEST['telefono']))?($_REQUEST['telefono']):(null),
             "direccion" =>  (isset($_REQUEST['direccion']))?($_REQUEST['direccion']):(null),
             "observaciones" =>  (isset($_REQUEST['observacion']))?($_REQUEST['observacion']):(null),
+            "carrera_id" =>  (isset($_REQUEST['carrera']))?($_REQUEST['carrera']):(null),
+
             ]; 
       
              try 

@@ -59,6 +59,19 @@ let valCel = (e, cedula, red) => {
 	}
 }
 
+//valida select vacio
+let valSelect = (e, value, red, mensaje) =>{
+	if (value < 1) {
+		error.style.display = 'block';
+		error.innerHTML += `<li>el campo ${mensaje}: no esta seleccionada</li>`;
+		red.className = 'select errorSelect'; 
+		e.preventDefault();
+	}
+	else{
+		red.className = 'select'; 
+	}
+}
+
 let valFechas = (e, fecha, red) => {
 	let fechaRegex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
 
@@ -117,6 +130,9 @@ let valEstudiante = (e) =>{
 	let cedula =document.getElementById('cedula');
 	let fecha_nacimiento =document.getElementById('fecha_nac');
 	let email =document.getElementById('email');
+	let telefono =document.getElementById('telefono');
+	let nacionalidad = document.getElementById('nacionalidad');
+	let carrera = document.getElementById('carrera');
 	let direccion =document.getElementById('direccion');
 	let observacion =document.getElementById('observacion');
 
@@ -126,6 +142,8 @@ let valEstudiante = (e) =>{
 	let apellido = 'Primer apellido';
 	let apellido2 = 'Segundo apellido';
 	let nombre_direccion= 'direccion';
+	let mensaje = 'nacionalidad';
+	let mensaje2 = 'carrera';
 
 
 	valCampo(e, primer_nombre.value, primer_nombre, nombre);
@@ -135,36 +153,11 @@ let valEstudiante = (e) =>{
 	valCel(e, cedula.value, cedula);
 	valFechas(e, fecha_nacimiento.value, fecha_nacimiento);
 	valEmail(e, email.value, email);
+	valSelect(e, nacionalidad.value,  nacionalidad, mensaje);
+	valSelect(e, carrera.value,  carrera, mensaje2);
 	valCampoVacio(e, direccion.value, direccion, nombre_direccion);
 }
 
-let valDocente = (e) => {
-	let primer_nombre =document.getElementById('nombre1');
-	let seg_nombre =document.getElementById('nombre2');
-	let primer_apellido =document.getElementById('apellido1');
-	let seg_apellido =document.getElementById('apellido2');
-	let cedula =document.getElementById('cedula');
-	let fecha_nacimiento =document.getElementById('fecha_nac');
-	let email =document.getElementById('email');
-	let direccion =document.getElementById('direccion');
-	let observacion =document.getElementById('observacion');
-
-	let nombre = 'Primer nombre';
-	let nombre2 = 'Segundo nombre';
-	let apellido = 'Primer apellido';
-	let apellido2 = 'Segundo apellido';
-	let nombre_direccion= 'direccion';
-
-	valCampo(e, primer_nombre.value, primer_nombre, nombre);
-	valCampo(e, seg_nombre.value, seg_nombre, nombre2);
-	valCampo(e, primer_apellido.value, primer_apellido, apellido);
-	valCampo(e, seg_apellido.value, seg_apellido, apellido2);
-	valCel(e, cedula.value, cedula);
-	valFechas(e, fecha_nacimiento.value, fecha_nacimiento);
-	valEmail(e, email.value, email);
-	valCampoVacio(e, direccion.value, direccion, nombre_direccion);
-
-}
 
 let valFormulario = (e) =>{
 	error.innerHTML = ""
