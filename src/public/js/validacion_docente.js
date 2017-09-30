@@ -147,6 +147,7 @@ let valDocente = (e) => {
 	let materia_imparte = document.getElementById('materia_imparte');
 	let condic_contrac = document.getElementById('condic_contrac');
 	let select_maestria = document.getElementById('select-maestria');
+	let nacionalidad = document.getElementById('nacionalidad');
 
 	let nombre = 'Primer nombre';
 	let nombre2 = 'Segundo nombre';
@@ -158,6 +159,8 @@ let valDocente = (e) => {
 	let materia = 'materia';
 	let contrato = 'condicion de contrato';
 	let maest = 'maestria';
+
+	let mensaje = 'nacionalidad';
 
 	valCampo(e, primer_nombre.value, primer_nombre, nombre);
 	valCampo(e, seg_nombre.value, seg_nombre, nombre2);
@@ -171,6 +174,7 @@ let valDocente = (e) => {
 	valCampoVacio(e, materia_imparte.value, materia_imparte, materia );
 	valCampo(e, condic_contrac.value, condic_contrac, contrato);
 	valMaestria(e, select_maestria.value, select_maestria);
+	valSelect(e, nacionalidad.value,  nacionalidad, mensaje);
 
 	if (maestria.style.display == 'inline-block'){
 		valCampo(e, maestria.value, maestria, maest);
